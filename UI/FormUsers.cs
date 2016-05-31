@@ -1,27 +1,26 @@
-﻿using System;
+﻿using Klogger.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
-using Oracle.DataAccess.Client;
 
-using Klogger.Data;
-namespace Klogger
+namespace Klogger.UI
 {
-    public partial class Form1 : Form
+    public partial class FormUsers : MetroFramework.Forms.MetroForm
     {
-        public Form1()
+        public FormUsers()
         {
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void FormUsers_Load(object sender, EventArgs e)
         {
             DisplayUsers();
-
         }
 
         private void DisplayUsers()
@@ -30,7 +29,10 @@ namespace Klogger
             {
                 DAL dal = DAL.GetInstance();
                 DataTable dt = dal.GetUsersRaw();
-                dataGridView1.DataSource = dt;
+
+                dataGridView.DataSource = dt;
+                dataGridView.Columns[1].Visible = false;
+
             }
             catch (Exception ex)
             {
@@ -38,13 +40,10 @@ namespace Klogger
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnAddUser_Click(object sender, EventArgs e)
         {
-            Form2 f = new Form2();
-            this.Close();
-           
-
+            FormAddUser f = new FormAddUser();
+            f.ShowDialog();
         }
-
     }
 }
