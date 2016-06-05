@@ -14,3 +14,4 @@ E:\Work\Sandi\College projects\BD an III\Klogger\obj\Debug\Klogger.exe
 E:\Work\Sandi\College projects\BD an III\Klogger\obj\Debug\Klogger.pdb
 E:\Work\Sandi\College projects\BD an III\Klogger\obj\Debug\Klogger.UI.FormGame.resources
 E:\Work\Sandi\College projects\BD an III\Klogger\obj\Debug\Klogger.UI.FormLogin.resources
+E:\Work\Sandi\College projects\BD an III\Klogger\obj\Debug\Klogger.csprojResolveAssemblyReference.cache

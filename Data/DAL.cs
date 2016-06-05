@@ -241,6 +241,15 @@ namespace Klogger
                 return User.CreateListUsers(rs);
             }
 
+            public Country GetCountry(int id_country)
+            {
+                StringBuilder sqlCmd = new StringBuilder();
+                sqlCmd.Append("SELECT * FROM " + DB.COUNTRIES_TABLE);
+                sqlCmd.Append(" WHERE id = ").Append(id_country);
+                DataTable rs = ExecStatement(sqlCmd.ToString());
+                return Country.CreateCountry(rs.Rows[0]);
+            }
+
             public ArrayList GetCountries()
             {
                 StringBuilder sqlCmd = new StringBuilder();
@@ -319,7 +328,39 @@ namespace Klogger
             public UserAction MostUsedAction(User user)
             {
                 if (user == null) return null;
+                
+                StringBuilder sqlCmd = new StringBuilder();
+                sqlCmd.Append("SELECT num, action_value FROM (");
+                sqlCmd.Append(" SELECT COUNT(ID) AS num, action_value FROM " + DB.USER_ACTIONS_TABLE);
+                sqlCmd.Append(" WHERE id_user = ").Append(user.id);
+                sqlCmd.Append(" GROUP BY action_value ");
+                sqlCmd.Append(" ORDER BY num DESC)");
+                DataTable dt = ExecStatement(sqlCmd.ToString());
+                var x = dt.Rows[0][0];
+                var t = dt.Rows[0][1];
+                UserAction action = new UserAction();
+                action.value = int.Parse(dt.Rows[0][1].ToString());
+                return action;
+            }
 
+            public UserAction MostUsedActionCountry(int id_country)
+            {
+                if (id_country == -1) return null;
+
+                StringBuilder sqlCmd = new StringBuilder();
+                sqlCmd.Append("SELECT num, action_value FROM (");
+                sqlCmd.Append(" SELECT COUNT(ID) AS num, action_value FROM " + DB.USER_ACTIONS_TABLE);
+                sqlCmd.Append(" WHERE id_user IN (");
+                sqlCmd.Append(" (SELECT id FROM " + DB.USERS_TABLE);
+                sqlCmd.Append(" WHERE id_country = ").Append(id_country).Append(")) ");
+                sqlCmd.Append(" GROUP BY action_value ");
+                sqlCmd.Append(" ORDER BY num DESC)");
+                DataTable dt = ExecStatement(sqlCmd.ToString());
+                var x = dt.Rows[0][0];
+                var t = dt.Rows[0][1];
+                UserAction action = new UserAction();
+                action.value = int.Parse(dt.Rows[0][1].ToString());
+                return action;
             }
 
             #endregion
