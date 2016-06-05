@@ -1,5 +1,6 @@
 ﻿using Klogger.Data;
 using MetroFramework.Controls;
+using MetroFramework.Forms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,52 +13,16 @@ using System.Windows.Forms;
 
 namespace Klogger.UI
 {
-    public partial class FormUsers : MetroFramework.Forms.MetroForm
+    public partial class FormUserActions : MetroForm
     {
-        public FormUsers()
+        public FormUserActions()
         {
             InitializeComponent();
         }
 
-        private void FormUsers_Load(object sender, EventArgs e)
+        private void FormUserActions_Load(object sender, EventArgs e)
         {
-            ShowUsers();
-        }
-
-        private void ShowUsers()
-        {
-            try
-            {
-                dataGridView.DataSource = null;
-                DAL dal = DAL.GetInstance();
-                DataTable dt = dal.GetUsersRaw();
-
-                dataGridView.DataSource = dt;
-                dataGridView.Columns[1].Visible = false;
-
-            }
-            catch 
-            {
-            }
-        }
-
-        private void btnAddUser_Click(object sender, EventArgs e)
-        {
-            FormAddUser f = new FormAddUser();
-            if (DialogResult.OK.Equals(f.ShowDialog()))
-                ShowUsers();
-        }
-
-        private void btnAddCountry_Click(object sender, EventArgs e)
-        {
-            FormAddCountry f = new FormAddCountry();
-            f.ShowDialog();
-        }
-
-        private void btnShowCountries_Click(object sender, EventArgs e)
-        {
-            FormCountries f = new FormCountries();
-            f.ShowDialog();
+            ShowUsersActions();
         }
 
         private void tiles_Click(object sender, EventArgs e)
@@ -105,23 +70,19 @@ namespace Klogger.UI
             }
         }
 
-        private void dataGridView_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
-        { 
-            DataGridViewRow dr = this.dataGridView.Rows[e.RowIndex];
-            FormAddUser f = new FormAddUser(dr);
-            if (DialogResult.OK.Equals(f.ShowDialog()))
-                ShowUsers();
+
+        private void ShowUsersActions()
+        {
+            dataGridView.Rows.Clear();
+            DAL dal = DAL.GetInstance();
+            dataGridView.DataSource = dal.GetUserActionsRaw();
         }
 
-        private void btnPlay_Click(object sender, EventArgs e)
+
+        private void FormUserActions_FormClosed(object sender, FormClosedEventArgs e)
         {
-            FormLogin f = new FormLogin();
-            if (DialogResult.OK.Equals(f.ShowDialog()))
-            {
-                FormGame game = new FormGame(f.user);
-                game.Show();
-                this.Hide();
-            }
+            Application.Exit();
         }
+      
     }
 }

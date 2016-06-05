@@ -19,6 +19,7 @@ namespace Klogger
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FormUsers());
+            Data.DAL.Close();
         }
     }
 }

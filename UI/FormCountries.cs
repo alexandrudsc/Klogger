@@ -1,5 +1,6 @@
 ﻿using Klogger.Data;
 using MetroFramework.Controls;
+using MetroFramework.Forms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,52 +13,25 @@ using System.Windows.Forms;
 
 namespace Klogger.UI
 {
-    public partial class FormUsers : MetroFramework.Forms.MetroForm
+    public partial class FormCountries : MetroForm
     {
-        public FormUsers()
+        public FormCountries()
         {
             InitializeComponent();
         }
 
-        private void FormUsers_Load(object sender, EventArgs e)
+        private void FormCountries_Load(object sender, EventArgs e)
         {
-            ShowUsers();
+            ShowCountries();
+
         }
 
-        private void ShowUsers()
+        private void ShowCountries()
         {
-            try
-            {
-                dataGridView.DataSource = null;
-                DAL dal = DAL.GetInstance();
-                DataTable dt = dal.GetUsersRaw();
-
-                dataGridView.DataSource = dt;
-                dataGridView.Columns[1].Visible = false;
-
-            }
-            catch 
-            {
-            }
-        }
-
-        private void btnAddUser_Click(object sender, EventArgs e)
-        {
-            FormAddUser f = new FormAddUser();
-            if (DialogResult.OK.Equals(f.ShowDialog()))
-                ShowUsers();
-        }
-
-        private void btnAddCountry_Click(object sender, EventArgs e)
-        {
-            FormAddCountry f = new FormAddCountry();
-            f.ShowDialog();
-        }
-
-        private void btnShowCountries_Click(object sender, EventArgs e)
-        {
-            FormCountries f = new FormCountries();
-            f.ShowDialog();
+            dataGridView.DataSource = null;
+            DAL dal = DAL.GetInstance();
+            DataTable dt = dal.GetCountriesRaw();
+            dataGridView.DataSource = dt;
         }
 
         private void tiles_Click(object sender, EventArgs e)
@@ -105,23 +79,18 @@ namespace Klogger.UI
             }
         }
 
-        private void dataGridView_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
-        { 
-            DataGridViewRow dr = this.dataGridView.Rows[e.RowIndex];
-            FormAddUser f = new FormAddUser(dr);
-            if (DialogResult.OK.Equals(f.ShowDialog()))
-                ShowUsers();
+        private void FormCountries_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
 
-        private void btnPlay_Click(object sender, EventArgs e)
+        private void dataGridView_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            FormLogin f = new FormLogin();
+            DataGridViewRow dr = this.dataGridView.Rows[e.RowIndex];
+            FormAddCountry f = new FormAddCountry(dr);
             if (DialogResult.OK.Equals(f.ShowDialog()))
-            {
-                FormGame game = new FormGame(f.user);
-                game.Show();
-                this.Hide();
-            }
+                ShowCountries();
         }
+
     }
 }

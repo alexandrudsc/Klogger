@@ -46,7 +46,7 @@
     </Reference>
     <Reference Include="Oracle.DataAccess, Version=4.112.3.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\Oracle.DataAccess.dll</HintPath>
+      <HintPath>..\..\..\..\..\app\Alexandru\product\11.2.0\client_2\odp.net\bin\4\Oracle.DataAccess.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -60,16 +60,54 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\Country.cs" />
     <Compile Include="Data\DAL.cs" />
     <Compile Include="Data\DB.cs" />
+    <Compile Include="Data\UserAction.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Data\User.cs" />
+    <Compile Include="UI\FormAddCountry.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\FormAddCountry.Designer.cs">
+      <DependentUpon>FormAddCountry.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\FormAddUser.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\FormAddUser.Designer.cs">
       <DependentUpon>FormAddUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\FormCountries.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\FormCountries.Designer.cs">
+      <DependentUpon>FormCountries.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\FormGame.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\FormGame.Designer.cs">
+      <DependentUpon>FormGame.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\FormLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\FormLogin.Designer.cs">
+      <DependentUpon>FormLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\FormQueries.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\FormQueries.Designer.cs">
+      <DependentUpon>FormQueries.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\FormUserActions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\FormUserActions.Designer.cs">
+      <DependentUpon>FormUserActions.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\FormUsers.cs">
       <SubType>Form</SubType>
@@ -86,8 +124,23 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UI\FormAddCountry.resx">
+      <DependentUpon>FormAddCountry.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\FormAddUser.resx">
       <DependentUpon>FormAddUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\FormCountries.resx">
+      <DependentUpon>FormCountries.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\FormGame.resx">
+      <DependentUpon>FormGame.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\FormLogin.resx">
+      <DependentUpon>FormLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\FormUserActions.resx">
+      <DependentUpon>FormUserActions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\FormUsers.resx">
       <DependentUpon>FormUsers.cs</DependentUpon>
@@ -104,6 +157,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
